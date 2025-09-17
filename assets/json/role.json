@@ -1,0 +1,10 @@
+{
+  "uid123": {
+    "email": "user@gmail.com",
+    "role": "user"
+  },
+  "uid456": {
+    "email": "admin@gmail.com",
+    "role": "admin"
+  }
+}
