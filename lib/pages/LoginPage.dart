@@ -2,6 +2,7 @@ import 'package:firebase_test/pages/SignPage.dart';
 import 'package:firebase_test/pages/chat/ChatPage.dart';
 import 'package:firebase_test/service/LoginService.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'HomePage.dart';
 
 class LoginPage extends StatefulWidget {
@@ -18,9 +19,21 @@ class _LoginPageState extends State<LoginPage> {
   final _password = TextEditingController();
   bool _obscurePassword = true;
 
+  navigate()async{
+
+    final SharedPreferences _sharedPreferences =await SharedPreferences.getInstance();
+
+    var data= _sharedPreferences.getString("user");
+    print(data);
+    if(data!.isNotEmpty){
+      Navigator.push(context, MaterialPageRoute(builder: (builder)=>HomePage()));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+    navigate();
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -110,16 +123,21 @@ class _LoginPageState extends State<LoginPage> {
                     child: ElevatedButton(
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
+
+                          print("${_email.text} ${_password.text}" );
+
                           final user = await _firestoreService.loginWithEmail(
                             _email.text.trim(),
                             _password.text.trim(),
                           );
 
+
+
                           if (user != null) {
                             // Login muvaffaqiyatli
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                builder: (builder) => ChatPage(),
+                                builder: (builder) => HomePage(),
                               ),
                             );
                           } else {

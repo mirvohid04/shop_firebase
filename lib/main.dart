@@ -6,6 +6,7 @@ import 'package:firebase_test/pages/LoginPage.dart';
 import 'package:firebase_test/pages/chat/ChatPage.dart';
 import 'package:firebase_test/service/role_service.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'firebase_options.dart';
 
@@ -45,7 +46,7 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home:RolePage(),
+      home:LoginPage(),
     );
   }
 }
